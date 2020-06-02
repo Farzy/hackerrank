@@ -72,8 +72,11 @@ tree() {
 
 # Main program
 
-declare -a roots=(50)
+# Read depth from command line
+read DEPTH
+
+declare -a roots=(49)
 
 init_matrix
-tree 5 0 $SIZE1
+tree $DEPTH 0 $SIZE1
 draw_matrix
