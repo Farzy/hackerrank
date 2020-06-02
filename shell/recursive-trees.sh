@@ -25,9 +25,8 @@ draw_matrix() {
 
 tree() {
     local -i iteration=$1
-    local -a roots=$2
-    local -i starty=$3
-    local -i size=$4
+    local -i starty=$2
+    local -i size=$3
 
     # End recursion
     if (( iteration == 0 )); then
@@ -36,7 +35,7 @@ tree() {
 
     local -i root_count=${#roots[*]}
 
-    echo "iteration: ${iteration}, roots: '${roots[*]}', root_count: ${root_count}" 
+    echo "iteration: ${iteration}, roots: '${roots[*]}', root_count: ${root_count}, starty: ${starty}, size: ${size}"
 
     for (( root=0 ; root < root_count ; root++)); do
         for (( y=starty ; y < starty + size ; y++ )); do
@@ -45,7 +44,12 @@ tree() {
     done
 
     # Double roots
-    roots=(${roots[*]} ${roots[*]})
+    local -a roots2
+    for (( root=0 ; root < root_count ; root++)); do
+        roots2[$(( 2*root ))]=${roots[$root]}
+        roots2[$(( 2*root+2 ))]=${roots[$root]}
+    done
+    roots=("${roots2[@]}")
     let "root_count=root_count * 2"
     echo "new roots: '${roots[*]}', root_count: ${root_count}" 
     
@@ -64,11 +68,12 @@ tree() {
     echo "new roots after branches: '${roots[*]}', root_count: ${root_count}" 
 
     # Recurse
-    tree $(( iteration-1 )) $roots $(( starty + 2*size )) $(( size/2 ))
+    tree $(( iteration-1 )) $(( starty + 2*size )) $(( size/2 ))
 }
 
 
+declare -a roots=(50)
+
 init_matrix
-roots=(50)
-tree 5 $roots 0 $SIZE1
+tree 5 0 $SIZE1
 draw_matrix
