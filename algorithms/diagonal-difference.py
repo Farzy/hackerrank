@@ -1,10 +1,6 @@
 #!/bin/python3
 
-import math
 import os
-import random
-import re
-import sys
 
 #
 # Complete the 'diagonalDifference' function below.
@@ -13,13 +9,15 @@ import sys
 # The function accepts 2D_INTEGER_ARRAY arr as parameter.
 #
 
-def diagonalDifference(arr):
+
+def diagonal_difference(arr):
     n = len(arr)
 
     sum = 0
     for i in range(n):
         sum += arr[i][i] - arr[i][n-i-1]
     return abs(sum)
+
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -31,7 +29,7 @@ if __name__ == '__main__':
     for _ in range(n):
         arr.append(list(map(int, input().rstrip().split())))
 
-    result = diagonalDifference(arr)
+    result = diagonal_difference(arr)
 
     fptr.write(str(result) + '\n')
 
