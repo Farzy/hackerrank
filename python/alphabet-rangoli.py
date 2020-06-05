@@ -1,12 +1,11 @@
 import itertools
-
+from string import ascii_lowercase
 
 def print_rangoli(size):
     for n in itertools.chain(range(size-1, -1, -1), range(1, size)):
-        pattern = "-".join(map(chr, itertools.chain(
-            range(ord('a') + size - 1, ord('a') + n - 1, -1),
-            range(ord('a') + n +1, ord('a') + size)
-        )))
+        s = ascii_lowercase[n:size]
+        s2 = s[::-1]
+        pattern = "-".join(s2 + s[1:])
         print(pattern.center(4 * size - 3, '-'))
 
 
