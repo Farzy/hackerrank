@@ -23,3 +23,4 @@ for _ in range(int(input())):
     page += input()
 
 parser.feed(page)
+parser.close()
