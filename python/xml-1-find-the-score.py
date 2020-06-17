@@ -3,7 +3,10 @@ import xml.etree.ElementTree as etree
 
 
 def get_attr_number(node):
-    return node
+    count = len(node.attrib)
+    for child in node:
+        count += get_attr_number(child)
+    return count
 
 
 if __name__ == '__main__':
