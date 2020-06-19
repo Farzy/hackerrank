@@ -1,26 +1,22 @@
 #!/bin/python3
 
-import math
-import os
-import random
-import re
-import sys
 from itertools import groupby
 
 
 # Complete the climbingLeaderboard function below.
 def climbingLeaderboard(scores, alice):
     lb_ranks = []
+    scores_unique = list(map(lambda x: x[0], groupby(scores)))
+    rank = len(scores_unique)
     for score_alice in alice:
-        rank = 1
-        score_previous = -1
-        for score_current in scores:
-            if score_alice >= score_current:
+        while True:
+            if rank == 0 or score_alice < scores_unique[rank - 1]:
+                lb_ranks.append(rank + 1)
                 break
-            if score_current != score_previous:
-                rank += 1
-            score_previous = score_current
-        lb_ranks.append(rank)
+            if score_alice == scores_unique[rank - 1]:
+                lb_ranks.append(rank)
+                break
+            rank -= 1
 
     return lb_ranks
 
@@ -43,4 +39,3 @@ if __name__ == '__main__':
     # fptr.write('\n')
 
     # fptr.close()
-
