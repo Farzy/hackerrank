@@ -11,13 +11,16 @@ from itertools import groupby
 # Complete the climbingLeaderboard function below.
 def climbingLeaderboard(scores, alice):
     lb_ranks = []
-    for score in alice:
-        scores_new = scores[:]
-        scores_new.append(score)
-        scores_new.sort(key=lambda x: -x)
-        alice_rank = list(map(lambda x: x[0],
-                              groupby(scores_new))).index(score) + 1
-        lb_ranks.append(alice_rank)
+    for score_alice in alice:
+        rank = 1
+        score_previous = -1
+        for score_current in scores:
+            if score_alice >= score_current:
+                break
+            if score_current != score_previous:
+                rank += 1
+            score_previous = score_current
+        lb_ranks.append(rank)
 
     return lb_ranks
 
