@@ -1,11 +1,7 @@
 #!/bin/python3
 
-import math
 import os
-import random
-import re
-import sys
-from datetime import date, timedelta
+from datetime import date
 
 
 # Complete the libraryFine function below.
@@ -15,10 +11,12 @@ def libraryFine(d1, m1, y1, d2, m2, y2):
 
     if date1 <= date2:
         return 0
-    if (m1, y1) == (m2, y2):
-        return (d2 - d1).days * 15
+    elif (m1, y1) == (m2, y2):
+        return (d1- d2) * 15
+    elif y1 == y2:
+        return (m1 - m2) * 500
     else:
-        return 42
+        return 10_000
 
 
 if __name__ == '__main__':
