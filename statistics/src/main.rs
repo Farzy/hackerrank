@@ -1,0 +1,45 @@
+use std::collections::HashMap;
+use std::env;
+use statistics::helper;
+
+mod basic_statistics;
+mod template;
+
+// Simplify long hashmap type
+type FunctionHash = HashMap<String, (String, fn())>;
+
+fn usage(functions: &FunctionHash) {
+    eprintln!(r#"
+Usage: PROGNAME [options] function
+
+ -h: Print this help
+
+Specify one function name.
+
+List of functions:"#);
+    for (name, (description, _)) in functions {
+        eprintln!(" - {}: {}", name, description);
+    }
+}
+
+fn main() {
+    let mut functions: FunctionHash = HashMap::new();
+    functions.insert(String::from("basic-statistics"), (String::from("Basic statistics"), basic_statistics::main));
+
+    if env::args().len() != 2 { // No arguments or too many
+        usage(&functions);
+    } else {
+        for k in env::args().skip(1) {
+            if k == "-h" || k == "--help" {
+                usage(&functions);
+                return;
+            } else if functions.contains_key(&k) {
+                let (description, func) = functions.get(&k).unwrap();
+                helper::section(description);
+                func();
+            } else {
+                eprintln!("\nERROR: Function '{}' not found", k);
+            }
+        }
+    }
+}
