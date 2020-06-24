@@ -1,9 +1,10 @@
+mod template;
+mod basic_statistics;
+mod weighted_mean;
+
 use std::collections::HashMap;
 use std::env;
 use statistics::helper;
-
-mod basic_statistics;
-mod template;
 
 // Simplify long hashmap type
 type FunctionHash = HashMap<String, (String, fn())>;
@@ -25,6 +26,7 @@ List of functions:"#);
 fn main() {
     let mut functions: FunctionHash = HashMap::new();
     functions.insert(String::from("basic-statistics"), (String::from("Basic statistics"), basic_statistics::main));
+    functions.insert(String::from("weighted-mean"), (String::from("Weighted mean"), weighted_mean::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
