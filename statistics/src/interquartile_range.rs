@@ -38,7 +38,7 @@ pub fn main() {
         })
         .collect::<Vec<usize>>();
 
-    let mut v2 = v.iter().zip(freq.iter())
+    let mut v2 : Vec<f64 >= v.iter().zip(freq.iter())
         .map(|(elt, freq)| {
             // Note: This elegant line does not work in HackerRank's Rust version
             // [*elt].repeat(*freq)
