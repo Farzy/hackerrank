@@ -32,8 +32,13 @@ def explore_direction(n, rq, cq, obstacles, direction):
 # Complete the queensAttack function below.
 def queensAttack(n, k, r_q, c_q, obstacles):
     count = 0
+    # Keep only obstacles that are aligned with the queen
+    real_obstacles = list(
+        filter(lambda x: x[0] == r_q or x[1] == c_q or abs(x[0] - r_q) == abs(x[1] - c_q),
+               obstacles)
+    )
     for direction in DIRECTION.keys():
-        count += explore_direction(n, r_q, c_q, obstacles, direction)
+        count += explore_direction(n, r_q, c_q, real_obstacles, direction)
     return count
 
 
