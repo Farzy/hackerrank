@@ -3,6 +3,7 @@ mod basic_statistics;
 mod weighted_mean;
 mod standard_deviation;
 mod quartiles;
+mod interquartile_range;
 
 use std::collections::HashMap;
 use std::env;
@@ -31,6 +32,7 @@ fn main() {
     functions.insert(String::from("weighted-mean"), (String::from("Weighted mean"), weighted_mean::main));
     functions.insert(String::from("standard-deviation"), (String::from("Standard deviation"), standard_deviation::main));
     functions.insert(String::from("quartiles"), (String::from("Quartiles"), quartiles::main));
+    functions.insert(String::from("interquartile-range"), (String::from("Interquartile range"), interquartile_range::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
