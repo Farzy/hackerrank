@@ -34,11 +34,11 @@ pub fn main() {
 
     // Mean
     println!("{:.1}", v.iter().sum::<f64>() / n as f64);
-    // Average
+    // Median
     if n % 2 == 0 {
-        println!("{}", (v[n/2 - 1] + v[n/2]) / 2.0);
+        println!("{:.1}", (v[n/2 - 1] + v[n/2]) / 2.0);
     } else {
-        println!("{}", v[n/2])
+        println!("{:.1}", v[n/2])
     }
     // Mode
     map.retain(|_, v| *v == map_max); // Keep entries with count == mode
