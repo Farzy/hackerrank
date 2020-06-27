@@ -24,7 +24,7 @@ pub mod math {
         if r > n {
             0
         } else {
-            fac(n) / fac(n - r)
+            ((n - r + 1)..=n).product()
         }
     }
 
@@ -32,7 +32,7 @@ pub mod math {
         if r > n {
             0
         } else {
-            fac(n) / fac(n - r) / fac(r)
+            perm(n, r) / fac(r)
         }
     }
 }
