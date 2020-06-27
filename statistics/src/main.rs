@@ -1,9 +1,13 @@
+
+extern crate num;
+
 mod template;
 mod basic_statistics;
 mod weighted_mean;
 mod standard_deviation;
 mod quartiles;
 mod interquartile_range;
+mod compound_event_probability;
 
 use std::collections::HashMap;
 use std::env;
@@ -33,6 +37,7 @@ fn main() {
     functions.insert(String::from("standard-deviation"), (String::from("Standard deviation"), standard_deviation::main));
     functions.insert(String::from("quartiles"), (String::from("Quartiles"), quartiles::main));
     functions.insert(String::from("interquartile-range"), (String::from("Interquartile range"), interquartile_range::main));
+    functions.insert(String::from("compound-event-probability"), (String::from("Compound Event Probability"), compound_event_probability::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
