@@ -3,18 +3,10 @@
 from collections import Counter
 
 
-def subjects_covered(member1, member2):
-    return sum(
-        map(
-            lambda t: max(int(t[0]), int(t[1])),
-            zip(member1, member2)
-        )
-    )
-
-
 # Complete the acmTeam function below.
 def acmTeam(topic):
-    all_couples = [subjects_covered(topic[m1], topic[m2])
+    topic = list(map(lambda n: int(n, 2), topic))
+    all_couples = [bin(topic[m1] | topic[m2])[2:].count("1")
                    for m1 in range(len(topic))
                    for m2 in range(m1 + 1, len(topic))
                    ]
