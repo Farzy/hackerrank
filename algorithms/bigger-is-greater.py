@@ -5,18 +5,25 @@ import os
 import random
 import re
 import sys
-
+from itertools import permutations
 
 # Complete the biggerIsGreater function below.
 def biggerIsGreater(w):
     if len(w) == 1:
         return "no answer"
-    for i in range(len(w)-1, 0, -1):
-        for j in range(i-1, -1, -1):
-            if w[j] < w[i]:
-                return "{}{}{}{}{}".format(w[0:j], w[i], w[j+1:i], w[j], w[i + 1:])
-            # print("{}:{} {} {} {} {} {}".format(j, i, w[0:j], w[i], w[j+1:i], w[j], w[i + 1:]))
-    return "no answer"
+    p = permutations(w)
+    ww = None
+    for s in p:
+        new_w = ''.join(s)
+        if new_w > w:
+            if ww is None:
+                ww = new_w
+            else:
+                ww = min(ww, new_w)
+    if ww:
+        return ww
+    else:
+        return "no answer"
 
 
 if __name__ == '__main__':
