@@ -155,4 +155,28 @@ mod test {
     fn comb_any() {
         assert_eq!(45, comb(10, 2));
     }
+
+    #[test]
+    fn bidi_all_args_ok() {
+        let res = bidi(1, 2, 0.5);
+        assert_eq!(0.5, res);
+    }
+
+    #[test]
+    #[should_panic]
+    fn bidi_x_greater_n() {
+        let _res = bidi(5, 4, 0.5);
+    }
+
+    #[test]
+    #[should_panic]
+    fn bidi_p_ge_0() {
+        let _res = bidi(3, 4, -1.0);
+    }
+
+    #[test]
+    #[should_panic]
+    fn bidi_p_le_1() {
+        let _res = bidi(3, 4, 1.1);
+    }
 }
