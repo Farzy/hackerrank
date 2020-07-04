@@ -1,6 +1,6 @@
-
 extern crate num;
 
+mod lib;
 mod template;
 mod basic_statistics;
 mod weighted_mean;
@@ -13,7 +13,7 @@ mod conditional_probability;
 
 use std::collections::HashMap;
 use std::env;
-use statistics::helper;
+use crate::lib::helper;
 
 // Simplify long hashmap type
 type FunctionHash = HashMap<String, (String, fn())>;

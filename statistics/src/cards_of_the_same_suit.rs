@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use statistics::math;
+use crate::lib::math;
 use num::rational::Ratio;
 
 pub fn main() {
