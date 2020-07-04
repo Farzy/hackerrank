@@ -97,7 +97,6 @@ pub fn comb(n: u64, r: u64) -> u64 {
 /// ```
 pub fn bidi(x : u32, n : u32, p : f64) -> f64 {
     assert_ne!(n, 0, "n should be greater than 0");
-    assert_ne!(x, 0, "x should be greater than 0");
     assert!(x <= n, "x should be less than n");
     assert!(0.0 <= p, "p should be between 0 and 1");
     assert!(p <= 1.0, "p should be between 0 and 1");
@@ -106,6 +105,69 @@ pub fn bidi(x : u32, n : u32, p : f64) -> f64 {
         * p.powi(x as i32)
         * (1f64 - p).powi((n - x) as i32)
 }
+
+/// Compute the Cumulative Probability of a binomial experiment
+///
+/// We consider the distribution function for some real-valued random variable, `X`,
+/// to be `F_X(x) = P(X <= x)`. Because this is a non-decreasing function that
+/// accumulates all the probabilities for the values of `X` up to (and including) `x`,
+/// we call it the cumulative distribution function (CDF) of `X`. As the CDF expresses
+/// a cumulative range of values, we can use the following formula to find the
+/// cumulative probabilities for all `x € [a, b]`:
+///   `P(a <= X <= B) = F_X(b) - F_X(b)`
+///
+/// # Arguments
+///
+/// * `x_min`: Minimum number of successes
+/// * `x_max`: Maximum number of successes
+/// * `n`: Total number of trials
+/// * `p`: Probability of success of 1 trial
+///
+/// # Examples
+///
+/// The probability of getting at most 5 heads is:
+///
+/// ```
+/// use statistics::math;
+///
+/// let x_min = 0;
+/// let x_max = 5;
+/// let n = 10;
+/// let p = 0.5;
+///
+/// let c = math::cdf(x_min, x_max, n, p);
+///
+/// assert_eq!(0.623046875, c);
+/// ```
+///
+/// The probability of getting at least 5 heads is:
+///
+/// ```
+/// use statistics::math;
+///
+/// let x_min = 5;
+/// let x_max = 10;
+/// let n = 10;
+/// let p = 0.5;
+///
+/// let c = math::cdf(x_min, x_max, n, p);
+///
+/// assert_eq!(0.623046875, c);
+/// ```
+pub fn cdf(x_min : u32, x_max: u32, n : u32, p : f64) -> f64 {
+    assert_ne!(n, 0, "n should be greater than 0");
+    assert!(x_min <= x_max, "x_min should be less than x_max");
+    assert!(x_max <= n, "x_max should be less than n");
+    assert!(0.0 <= p, "p should be between 0 and 1");
+    assert!(p <= 1.0, "p should be between 0 and 1");
+
+
+    (x_min..=x_max).map(|x| comb(n as u64, x as u64) as f64
+        * p.powi(x as i32)
+        * (1f64 - p).powi((n - x) as i32))
+        .sum()
+}
+
 
 #[cfg(test)]
 mod test {
