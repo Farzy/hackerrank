@@ -1,7 +1,35 @@
+//! Mathematical and probability functions used in some
+//! exercices.
+
+/// Compute the Factorial of a positive integer
+///
+/// # Examples
+///
+/// ```
+/// use statistics::math;
+///
+/// let n = 5;
+/// let fac5 = math::fac(5);
+///
+/// assert_eq!(fac5, 120);
+/// ```
 pub fn fac(n: u64) -> u64 {
     (1..=n).product()
 }
 
+/// Compute the number of Permutations of r elements from a set of n elements
+///
+/// # Examples
+///
+/// ```
+/// use statistics::math;
+///
+/// let n = 5;
+/// let r = 3;
+/// let perm_3_5 = math::perm(n, r);
+///
+/// assert_eq!(perm_3_5, 60);
+/// ```
 pub fn perm(n: u64, r: u64) -> u64 {
     if r > n {
         0
@@ -10,6 +38,19 @@ pub fn perm(n: u64, r: u64) -> u64 {
     }
 }
 
+/// Compute the number of Combinations of r elements from a set of n elements
+///
+/// # Examples
+///
+/// ```
+/// use statistics::math;
+///
+/// let n = 5;
+/// let r = 3;
+/// let comb_3_5 = math::comb(n, r);
+///
+/// assert_eq!(comb_3_5, 10);
+/// ```
 pub fn comb(n: u64, r: u64) -> u64 {
     if r > n {
         0
@@ -17,6 +58,8 @@ pub fn comb(n: u64, r: u64) -> u64 {
         perm(n, r) / fac(r)
     }
 }
+
+
 
 #[cfg(test)]
 mod test {
