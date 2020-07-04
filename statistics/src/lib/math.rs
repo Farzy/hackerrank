@@ -59,7 +59,53 @@ pub fn comb(n: u64, r: u64) -> u64 {
     }
 }
 
+/// Compute the Binomial Distribution of a binomial experiment
+///
+/// We define a binomial process to be a binomial experiment meeting the following conditions:
+//
+/// * The number of successes is `x`
+/// * The total number of trials is `n`
+/// * The probability of success of 1 trial is `p`
+/// * The probability of failure of 1 trial is `q`, where `q = 1 - p`.
+/// * `bidi(x, n, p)` is the binomial probability, meaning the probability of having exactly
+/// `x` successes out of `n` trials.
+///
+/// The binomial random variable is the number of successes, `x`, out of `n` trials.
+///
+/// The binomial distribution is the probability distribution for the binomial random variable,
+/// given by the following probability mass function:
+/// `bidi(x, n, p) = comb(n, x) * p^x * q^(n-x)`
+///
+/// # Arguments
+///
+/// * `x`: Number of successes
+/// * `n`: Total number of trials
+/// * `p`: Probability of success of 1 trial
+///
+/// # Examples
+///
+/// ```
+/// use statistics::math;
+///
+/// let x = 5;
+/// let n = 10;
+/// let p = 0.5;
+///
+/// let b = math::bidi(x, n, p);
+///
+/// assert_eq!(0.24609375, b);
+/// ```
+pub fn bidi(x : u32, n : u32, p : f64) -> f64 {
+    assert_ne!(n, 0, "n should be greater than 0");
+    assert_ne!(x, 0, "x should be greater than 0");
+    assert!(x <= n, "x should be less than n");
+    assert!(0.0 <= p, "p should be between 0 and 1");
+    assert!(p <= 1.0, "p should be between 0 and 1");
 
+    comb(n as u64, x as u64) as f64
+        * p.powi(x as i32)
+        * (1f64 - p).powi((n - x) as i32)
+}
 
 #[cfg(test)]
 mod test {
