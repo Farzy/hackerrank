@@ -1,3 +1,4 @@
+
 extern crate num;
 
 mod lib;
@@ -10,6 +11,7 @@ mod interquartile_range;
 mod compound_event_probability;
 mod cards_of_the_same_suit;
 mod conditional_probability;
+mod binomial_distribution;
 
 use std::collections::HashMap;
 use std::env;
@@ -42,6 +44,7 @@ fn main() {
     functions.insert(String::from("compound-event-probability"), (String::from("Compound Event Probability"), compound_event_probability::main));
     functions.insert(String::from("cards-of-the-same-suit"), (String::from("Cards of the same suite"), cards_of_the_same_suit::main));
     functions.insert(String::from("conditional-probability"), (String::from("Conditional Probability"), conditional_probability::main));
+    functions.insert(String::from("binomial-distribution"), (String::from("Binomial Distribution"), binomial_distribution::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);

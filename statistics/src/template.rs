@@ -5,7 +5,7 @@ macro_rules! parse_input {
 }
 
 #[allow(dead_code)]
-fn main() {
+pub fn main() {
     let mut input_line = String::new();
     io::stdin().read_line(&mut input_line).unwrap();
     let n = parse_input!(input_line, i32);

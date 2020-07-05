@@ -95,6 +95,7 @@ pub fn comb(n: u64, r: u64) -> u64 {
 ///
 /// assert_eq!(0.24609375, b);
 /// ```
+#[allow(dead_code)]
 pub fn bidi(x : u32, n : u32, p : f64) -> f64 {
     assert_ne!(n, 0, "n should be greater than 0");
     assert!(x <= n, "x should be less than n");
@@ -154,6 +155,7 @@ pub fn bidi(x : u32, n : u32, p : f64) -> f64 {
 ///
 /// assert_eq!(0.623046875, c);
 /// ```
+#[allow(dead_code)]
 pub fn cdf(x_min : u32, x_max: u32, n : u32, p : f64) -> f64 {
     assert_ne!(n, 0, "n should be greater than 0");
     assert!(x_min <= x_max, "x_min should be less than x_max");
