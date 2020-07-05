@@ -225,6 +225,49 @@ pub fn negbidi(x : u32, n : u32, p : f64) -> f64 {
         * (1f64 - p).powi((n - x) as i32)
 }
 
+/// Geometric Distribution
+///
+/// The geometric distribution is a special case of the negative binomial distribution
+/// that deals with the number of Bernoulli trials required to get a success (i.e.,
+/// counting the number of failures before the first success).
+//
+/// * The total number of trials is `n`
+/// * The probability of success of 1 trial is `p`
+///
+/// The geometric distribution is a negative binomial distribution where the number
+/// of successes is 1. We express this with the following formula::
+/// `geomdi(n, p) = p * q^(n-1)`
+///
+/// # Arguments
+///
+/// * `n`: Total number of trials
+/// * `p`: Probability of success of 1 trial
+///
+/// # Examples
+///
+/// Bob is a high school basketball player. He is a **70%** free throw shooter, meaning
+/// his probability of making a free throw is **0.7**. What is the probability that
+/// Bob makes his first free throw on his fifth shot?
+///
+/// ```
+/// use statistics::math;
+///
+/// let n = 5;
+/// let p = 0.7;
+///
+/// let p_fifth = math::geomdi(n, p);
+///
+/// assert_eq!("0.00567", format!("{:.5}", p_fifth));
+/// ```
+#[allow(dead_code)]
+pub fn geomdi(n : u32, p : f64) -> f64 {
+    assert_ne!(n, 0, "n should be greater than 0");
+    assert!(0.0 <= p, "p should be between 0 and 1");
+    assert!(p <= 1.0, "p should be between 0 and 1");
+
+    p * (1f64 - p).powi((n - 1) as i32)
+}
+
 
 #[cfg(test)]
 mod test {
