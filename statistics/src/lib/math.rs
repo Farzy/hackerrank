@@ -268,6 +268,65 @@ pub fn geomdi(n : u32, p : f64) -> f64 {
     p * (1f64 - p).powi((n - 1) as i32)
 }
 
+/// Poisson Distribution
+///
+/// A **Poisson experiment** is a statistical experiment that has the following properties:
+///
+/// * The outcome of each trial is either success or failure.
+/// * The average number of successes `λ` that occurs in a specified region is known.
+/// * The probability that a success will occur is proportional to the size of the region.
+/// * The probability that a success will occur in an extremely small region is virtually zero.
+///
+/// A Poisson random variable is the number of successes that result from a Poisson experiment.
+/// The probability distribution of a Poisson random variable is called a Poisson
+/// distribution:
+/// `P(k,λ) = (λ^k * e^-λ)/k!`
+///
+/// # Arguments
+///
+/// * `λ` is the average number of successes that occur in a specified region.
+/// * `k` is the actual number of successes that occur in a specified region.
+/// * `P(k,λ)` is the Poisson probability, which is the probability of getting exactly `k`
+///   successes when the average number of successes is `λ`.
+///
+/// # Examples
+///
+/// Acme Realty company sells an average of 2 homes per day. What is the probability that
+/// exactly 3 homes will be sold tomorrow?
+///
+/// ```
+/// use statistics::math;
+///
+/// let lambda = 2.0;
+/// let k = 3;
+///
+/// let p_3_homes = math::poisson(k, lambda);
+///
+/// assert_eq!("0.180", format!("{:.3}", p_3_homes));
+/// ```
+///
+/// Suppose the average number of lions seen by tourists on a one-day safari is 5. What is
+/// the probability that tourists will see fewer than 4 lions on the next one-day safari?
+///
+/// ```
+/// use statistics::math;
+///
+/// let lambda = 5.0;
+/// let k_max = 3;
+///
+/// let p_less_than_4 = (0..=k_max)
+///                         .map(|k| math::poisson(k, lambda))
+///                         .sum::<f64>();
+///
+/// assert_eq!("0.2650", format!("{:.4}", p_less_than_4));
+/// ```
+#[allow(dead_code)]
+pub fn poisson(k: u32, lambda : f64) -> f64 {
+    assert!(0.0 < lambda, "lambda should be greater than 0");
+
+    (lambda.powi(k as i32) * (-lambda).exp()) / fac(k as u64) as f64
+}
+
 
 #[cfg(test)]
 mod test {
