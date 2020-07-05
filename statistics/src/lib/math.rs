@@ -1,7 +1,7 @@
 //! Mathematical and probability functions used in some
 //! exercices.
 
-/// Compute the Factorial of a positive integer
+/// Compute the Factorial of a positive integer `n`
 ///
 /// # Examples
 ///
@@ -17,7 +17,7 @@ pub fn fac(n: u64) -> u64 {
     (1..=n).product()
 }
 
-/// Compute the number of Permutations of r elements from a set of n elements
+/// Compute the number of Permutations of `r` elements from a set of `n` elements
 ///
 /// # Examples
 ///
@@ -38,7 +38,7 @@ pub fn perm(n: u64, r: u64) -> u64 {
     }
 }
 
-/// Compute the number of Combinations of r elements from a set of n elements
+/// Compute the number of Combinations of `r` elements from a set of `n` elements
 ///
 /// # Examples
 ///
@@ -83,6 +83,9 @@ pub fn comb(n: u64, r: u64) -> u64 {
 /// * `p`: Probability of success of 1 trial
 ///
 /// # Examples
+///
+/// If we toss a fair coin, what is the probability of getting 5 heads in a total
+/// of 10 throws?
 ///
 /// ```
 /// use statistics::math;
@@ -168,6 +171,58 @@ pub fn cdf(x_min : u32, x_max: u32, n : u32, p : f64) -> f64 {
         * p.powi(x as i32)
         * (1f64 - p).powi((n - x) as i32))
         .sum()
+}
+
+/// Compute the Negative Binomial Distribution of a binomial experiment
+///
+/// We define a negative binomial process to be a binomial experiment meeting the following conditions:
+//
+/// * The number of successes is `x`
+/// * The total number of trials is `n`
+/// * The probability of success of 1 trial is `p`
+/// * The probability of failure of 1 trial is `q`, where `q = 1 - p`.
+/// * `bidi(x, n, p)` is the negative binomial probability, meaning the probability
+///   of having `x - 1` success after `n - 1` trials and having `x` successes after `n` trials.
+///
+/// The negative binomial random variable is the number of experiments until
+/// the `x`th success occurs.
+///
+/// The negative binomial distribution is the probability distribution for the negative binomial
+/// random variable, given by the following probability mass function:
+/// `negbidi(x, n, p) = comb(n-1, x-1) * p^x * q^(n-x)`
+///
+/// # Arguments
+///
+/// * `x`: Number of successes
+/// * `n`: Total number of trials
+/// * `p`: Probability of success of 1 trial
+///
+/// # Examples
+///
+/// If we toss a fair coin, what is the probability that at the 10th throws if
+/// will have finally have 5 heads?
+///
+/// ```
+/// use statistics::math;
+///
+/// let x = 5;
+/// let n = 10;
+/// let p = 0.5;
+///
+/// let nb = math::negbidi(x, n, p);
+///
+/// assert_eq!(0.123046875, nb);
+/// ```
+#[allow(dead_code)]
+pub fn negbidi(x : u32, n : u32, p : f64) -> f64 {
+    assert_ne!(n, 0, "n should be greater than 0");
+    assert!(x <= n, "x should be less than n");
+    assert!(0.0 <= p, "p should be between 0 and 1");
+    assert!(p <= 1.0, "p should be between 0 and 1");
+
+    comb((n - 1) as u64, (x - 1) as u64) as f64
+        * p.powi(x as i32)
+        * (1f64 - p).powi((n - x) as i32)
 }
 
 
