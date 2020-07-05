@@ -12,6 +12,7 @@ mod compound_event_probability;
 mod cards_of_the_same_suit;
 mod conditional_probability;
 mod binomial_distribution;
+mod binomial_distribution_2;
 
 use std::collections::HashMap;
 use std::env;
@@ -45,6 +46,7 @@ fn main() {
     functions.insert(String::from("cards-of-the-same-suit"), (String::from("Cards of the same suite"), cards_of_the_same_suit::main));
     functions.insert(String::from("conditional-probability"), (String::from("Conditional Probability"), conditional_probability::main));
     functions.insert(String::from("binomial-distribution"), (String::from("Binomial Distribution"), binomial_distribution::main));
+    functions.insert(String::from("binomial-distribution-2"), (String::from("Binomial Distribution 2"), binomial_distribution_2::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
