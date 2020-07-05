@@ -14,6 +14,7 @@ mod binomial_distribution;
 mod binomial_distribution_2;
 mod geometric_distribution;
 mod geometric_distribution_2;
+mod poisson_distribution;
 
 use std::collections::HashMap;
 use std::env;
@@ -50,6 +51,7 @@ fn main() {
     functions.insert(String::from("binomial-distribution-2"), (String::from("Binomial Distribution 2"), binomial_distribution_2::main));
     functions.insert(String::from("geometric-distribution"), (String::from("Geometric Distribution "), geometric_distribution::main));
     functions.insert(String::from("geometric-distribution-2"), (String::from("Geometric Distribution 2"), geometric_distribution_2::main));
+    functions.insert(String::from("poisson-distribution"), (String::from("Poisson Distribution "), poisson_distribution::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
