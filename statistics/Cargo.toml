@@ -12,3 +12,4 @@ doctest = true
 
 [dependencies]
 num = "0.3"
+statrs = "0.13"
