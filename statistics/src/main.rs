@@ -19,6 +19,7 @@ mod poisson_distribution_2;
 mod normal_distribution;
 mod normal_distribution_2;
 mod the_central_limit_theorem;
+mod the_central_limit_theorem_2;
 
 use std::collections::HashMap;
 use std::env;
@@ -60,6 +61,7 @@ fn main() {
     functions.insert(String::from("normal-distribution"), (String::from("Normal Distribution"), normal_distribution::main));
     functions.insert(String::from("normal-distribution-2"), (String::from("Normal Distribution 2"), normal_distribution_2::main));
     functions.insert(String::from("the-central-limit-theorem"), (String::from("The Central Limit Theorem"), the_central_limit_theorem::main));
+    functions.insert(String::from("the-central-limit-theorem-2"), (String::from("The Central Limit Theorem 2"), the_central_limit_theorem_2::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
