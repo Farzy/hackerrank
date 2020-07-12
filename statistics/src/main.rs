@@ -23,6 +23,7 @@ mod the_central_limit_theorem_2;
 mod the_central_limit_theorem_3;
 mod pearson_correlation_coefficient;
 mod spearman_rank_correlation_coefficient;
+mod least_square_regression_line;
 
 use std::collections::HashMap;
 use std::env;
@@ -68,6 +69,7 @@ fn main() {
     functions.insert(String::from("the-central-limit-theorem-3"), (String::from("The Central Limit Theorem 3"), the_central_limit_theorem_3::main));
     functions.insert(String::from("pearson-correlation-coefficient"), (String::from("Pearson Correlation Coefficient"), pearson_correlation_coefficient::main));
     functions.insert(String::from("spearman-rank-correlation-coefficient"), (String::from("Spearman Rank Correlation Coefficient"), spearman_rank_correlation_coefficient::main));
+    functions.insert(String::from("least-square-regression-line"), (String::from("Least Square Regression Line"), least_square_regression_line::main));
 
     if env::args().len() != 2 { // No arguments or too many
         usage(&functions);
