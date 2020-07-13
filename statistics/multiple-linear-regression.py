@@ -6,9 +6,7 @@ y = []
 features = []
 for _ in range(n):
     *feature, single_y = map(float, input().split())
-    f = [1.0]
-    f.extend(feature)
-    features.append(f)
+    features.append([1.0] + feature)
     y.append(single_y)
 
 features = np.array(features)
@@ -18,9 +16,7 @@ queries = []
 q = int(input())
 for _ in range(q):
     query = list(map(float, input().split()))
-    f = [1.0]
-    f.extend(query)
-    queries.append(np.array(f))
+    queries.append(np.array([1.0] + query))
 
 features_t = features.transpose()
 
