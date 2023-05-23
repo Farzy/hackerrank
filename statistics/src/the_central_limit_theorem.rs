@@ -1,5 +1,5 @@
 use std::io;
-use statrs::distribution::{Normal, Univariate};
+use statrs::distribution::{ContinuousCDF, Normal};
 
 macro_rules! parse_input {
     ($x:expr, $t:ident) => ($x.trim().parse::<$t>().unwrap())

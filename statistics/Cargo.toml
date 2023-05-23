@@ -11,5 +11,5 @@ path = "src/lib/mod.rs"
 doctest = true
 
 [dependencies]
-num = "0.3"
-statrs = "0.13"
+num = "0.4.0"
+statrs = "0.16.0"
