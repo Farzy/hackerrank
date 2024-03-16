@@ -12,7 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/statistics/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/statistics/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (hackerrank-15F4zlZB-py3.12)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Python 3.8 interpreter library" level="application" />
   </component>
