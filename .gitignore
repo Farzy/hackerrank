@@ -134,3 +134,7 @@ fabric.properties
 **/*.rs.bk
 
 /test*.txt
+
+### uv / Python venv
+.venv/
+__pycache__/
